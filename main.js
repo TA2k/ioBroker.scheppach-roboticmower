@@ -223,7 +223,7 @@ class ScheppachRoboticmower extends utils.Adapter {
           await this.setObjectNotExistsAsync(id + ".mqtt", {
             type: "channel",
             common: {
-              name: "Mqtt data",
+              name: "Live Mqtt Data",
             },
             native: {},
           });
@@ -445,7 +445,7 @@ class ScheppachRoboticmower extends utils.Adapter {
           await this.updateDevices();
         }, 10 * 1000);
       } else {
-        if (id.indexOf(".workStatusCode") !== -1) {
+        if (id.indexOf(".workStatusCode") !== -1 || id.indexOf("mqtt.mode") !== -1) {
           this.setState(deviceId + ".remote.mode", state.val, true);
         }
       }
