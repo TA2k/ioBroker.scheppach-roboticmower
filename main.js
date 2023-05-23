@@ -273,7 +273,7 @@ class ScheppachRoboticmower extends utils.Adapter {
       {
         path: "status",
         url: "http://server.sk-robot.com/api/mower/device/getBysn?sn=$id",
-        desc: "Status of the device",
+        desc: "Status 1x update per hour",
       },
     ];
     for (const id of this.deviceArray) {
