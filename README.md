@@ -15,6 +15,14 @@
 
 Adapter for Scheppach robotic mowers
 
+## Control
+
+Send mode via scheppach-roboticmower.0.id.remote.mode
+
+## Discussion and Questions
+
+<https://forum.iobroker.net/topic/65713/test-scheppach-robotic-mower>
+
 ## Changelog
 
 ### 0.0.1
