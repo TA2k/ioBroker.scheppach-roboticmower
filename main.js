@@ -54,6 +54,7 @@ class ScheppachRoboticmower extends utils.Adapter {
     if (this.session.access_token) {
       await this.getDeviceList();
       await this.updateDevices();
+      await this.connectMqtt();
       this.updateInterval = setInterval(async () => {
         await this.updateDevices();
       }, 60 * 60 * 1000);
@@ -71,7 +72,6 @@ class ScheppachRoboticmower extends utils.Adapter {
         "Accept-Language": "de-de",
         Authorization: "Basic YXBwOmFwcA==",
         "Content-Type": "application/x-www-form-urlencoded",
-        Host: "server.sk-robot.com",
         Connection: "Keep-Alive",
         "User-Agent": "okhttp/4.4.1",
       },
@@ -191,8 +191,8 @@ class ScheppachRoboticmower extends utils.Adapter {
             {
               command: "mode",
               name: "1 = Start, 0 = Pause, 2 = Home, 4 = Border",
-              type: "number",
-              role: "value",
+              type: "string",
+              role: "state",
               def: 0,
             },
           ];
@@ -296,7 +296,11 @@ class ScheppachRoboticmower extends utils.Adapter {
             if (!res.data) {
               return;
             }
-            const data = res.data;
+            if (res.data.code !== 0) {
+              this.log.error(res.data);
+              return;
+            }
+            const data = res.data.data;
 
             const forceIndex = true;
             const preferedArrayName = null;
@@ -307,18 +311,18 @@ class ScheppachRoboticmower extends utils.Adapter {
               preferedArrayName: preferedArrayName,
               channelName: element.desc,
             });
-            await this.setObjectNotExistsAsync(element.path + ".json", {
-              type: "state",
-              common: {
-                name: "Raw JSON",
-                write: false,
-                read: true,
-                type: "string",
-                role: "json",
-              },
-              native: {},
-            });
-            this.setState(element.path + ".json", JSON.stringify(data), true);
+            // await this.setObjectNotExistsAsync(id + '.' + element.path + '.json', {
+            //   type: 'state',
+            //   common: {
+            //     name: 'Raw JSON',
+            //     write: false,
+            //     read: true,
+            //     type: 'string',
+            //     role: 'json',
+            //   },
+            //   native: {},
+            // })
+            // this.setState(id + '.' + element.path + '.json', JSON.stringify(data), true)
           })
           .catch((error) => {
             if (error.response) {
@@ -411,7 +415,6 @@ class ScheppachRoboticmower extends utils.Adapter {
 
         await this.requestClient({
           method: "post",
-          maxBodyLength: Infinity,
           url:
             "http://server.sk-robot.com/api/mower/device/setWorkStatus/" +
             deviceId +
