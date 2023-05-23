@@ -1,0 +1,74 @@
+{
+  "name": "iobroker.scheppach-roboticmower",
+  "version": "0.0.1",
+  "description": "Adapter for Scheppach robotic mowers",
+  "author": {
+    "name": "TA2k",
+    "email": "tombox2020@gmail.com"
+  },
+  "homepage": "https://github.com/TA2k/ioBroker.scheppach-roboticmower",
+  "license": "MIT",
+  "keywords": [
+    "scheppach",
+    "mower"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TA2k/ioBroker.scheppach-roboticmower.git"
+  },
+  "engines": {
+    "node": ">= 16"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^2.6.8",
+    "axios": "^1.4.0",
+    "json2iob": "^2.4.4",
+    "mqtt": "^4.3.7",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@iobroker/testing": "^4.1.0",
+    "@tsconfig/node16": "^1.0.4",
+    "@types/chai": "^4.3.5",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.2.3",
+    "@types/proxyquire": "^1.3.28",
+    "@types/sinon": "^10.0.15",
+    "@types/sinon-chai": "^3.2.9",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "proxyquire": "^2.1.3",
+    "sinon": "^15.1.0",
+    "sinon-chai": "^3.7.0",
+    "typescript": "~5.0.4"
+  },
+  "main": "main.js",
+  "files": [
+    "admin{,/!(src)/**}/!(tsconfig|tsconfig.*|.eslintrc).{json,json5}",
+    "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
+    "lib/",
+    "www/",
+    "io-package.json",
+    "LICENSE",
+    "main.js"
+  ],
+  "scripts": {
+    "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
+    "test:package": "mocha test/package --exit",
+    "test:integration": "mocha test/integration --exit",
+    "test": "npm run test:js && npm run test:package",
+    "check": "tsc --noEmit -p tsconfig.check.json",
+    "lint": "eslint .",
+    "translate": "translate-adapter"
+  },
+  "bugs": {
+    "url": "https://github.com/TA2k/ioBroker.scheppach-roboticmower/issues"
+  },
+  "readmeFilename": "README.md"
+}

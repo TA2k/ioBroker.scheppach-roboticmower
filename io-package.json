@@ -1,0 +1,111 @@
+{
+  "common": {
+    "name": "scheppach-roboticmower",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "uk": "Початкова версія",
+        "zh-cn": "首次出版"
+      }
+    },
+    "title": "Scheppach Robotic Mower",
+    "titleLang": {
+      "en": "Scheppach Robotic Mower",
+      "de": "Scheppach Robotermäher",
+      "ru": "Роботизированная косилка Scheppach",
+      "pt": "Robô Cortador Scheppach",
+      "nl": "Scheppach robotmaaier",
+      "fr": "Robot Tondeuse Scheppach",
+      "it": "Robot rasaerba Scheppach",
+      "es": "Cortacésped robótico Scheppach",
+      "pl": "Kosiarka automatyczna Scheppach",
+      "uk": "Роботизована косарка Scheppach",
+      "zh-cn": "Scheppach 机器人割草机"
+    },
+    "desc": {
+      "en": "Adapter for Scheppach robotic mowers",
+      "de": "Adapter für Scheppach Robotermäher",
+      "ru": "Адаптер для косилок-роботов Scheppach",
+      "pt": "Adaptador para robôs cortadores de grama Scheppach",
+      "nl": "Adapter voor Scheppach robotmaaiers",
+      "fr": "Adaptateur pour robots tondeuses Scheppach",
+      "it": "Adattatore per robot rasaerba Scheppach",
+      "es": "Adaptador para cortacéspedes robóticos Scheppach",
+      "pl": "Adapter do kosiarek automatycznych Scheppach",
+      "uk": "Адаптер для роботизованих косарок Scheppach",
+      "zh-cn": "Scheppach 机器人割草机适配器"
+    },
+    "authors": ["TA2k <tombox2020@gmail.com>"],
+    "keywords": ["scheppach", "mower"],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "scheppach-roboticmower.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/TA2k/ioBroker.scheppach-roboticmower/main/admin/scheppach-roboticmower.png",
+    "readme": "https://github.com/TA2k/ioBroker.scheppach-roboticmower/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "garden",
+    "compact": true,
+    "connectionType": "cloud",
+    "dataSource": "push",
+    "plugins": {
+      "sentry": {
+        "dsn": "https://802f699c7aa84a62b0bcb54b31485352@sentry.iobroker.net/226"
+      }
+    },
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.2.28"
+      }
+    ]
+  },
+  "encryptedNative": ["password"],
+  "protectedNative": ["password"],
+  "native": {
+    "username": "",
+    "password": ""
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
+}
