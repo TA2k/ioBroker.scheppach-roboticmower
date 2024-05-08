@@ -191,8 +191,8 @@ class ScheppachRoboticmower extends utils.Adapter {
             {
               command: 'mode',
               name: '1 = Start, 0 = Pause, 2 = Home, 4 = Border',
-              type: 'string',
-              role: 'state',
+              type: 'number',
+              role: 'level',
               def: 0,
             },
           ];
