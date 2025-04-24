@@ -55,13 +55,19 @@ class ScheppachRoboticmower extends utils.Adapter {
       await this.getDeviceList();
       await this.updateDevices();
       await this.connectMqtt();
-      this.updateInterval = setInterval(async () => {
-        await this.updateDevices();
-      }, 60 * 60 * 1000);
+      this.updateInterval = setInterval(
+        async () => {
+          await this.updateDevices();
+        },
+        60 * 60 * 1000,
+      );
     }
-    this.refreshTokenInterval = setInterval(() => {
-      this.refreshToken();
-    }, (this.session.expires_in || 3600) * 1000);
+    this.refreshTokenInterval = setInterval(
+      () => {
+        this.refreshToken();
+      },
+      (this.session.expires_in || 3600) * 1000,
+    );
   }
   async login() {
     await this.requestClient({
@@ -191,13 +197,13 @@ class ScheppachRoboticmower extends utils.Adapter {
             {
               command: 'mode',
               name: '1 = Start, 0 = Pause, 2 = Home, 4 = Border',
-              type: 'number',
+              type: 'mixed',
               role: 'level',
               def: 0,
             },
           ];
           for (const remote of remoteArray) {
-            await this.extendObjectAsync(id + '.remote.' + remote.command, {
+            await this.extendObject(id + '.remote.' + remote.command, {
               type: 'state',
               common: {
                 name: remote.name || '',
@@ -394,6 +400,7 @@ class ScheppachRoboticmower extends utils.Adapter {
       this.refreshTokenInterval && clearInterval(this.refreshTokenInterval);
       callback();
     } catch (e) {
+      this.log.error('Error in onUnload: ' + e);
       callback();
     }
   }
